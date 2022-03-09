@@ -1,22 +1,50 @@
 import { useState, useEffect } from 'react'
+import {
+  TeamInfoDataCompiler,
+  rosterCompile,
+} from '../functions/TeamDataCompiler'
 
-export const useFetch = (url) => {
+export const useFetch = (url, dataType) => {
   const [data, setData] = useState(null)
-  const [isPending, setIsPending] = useState(false)
+  const [isPending, setIsPending] = useState(true)
   const [error, setError] = useState(null)
+
   useEffect(() => {
+    const controller = new AbortController()
     const fetchData = async () => {
-      setIsPending(true)
       try {
-        const response = await fetch(url)
+        const response = await fetch(url, { signal: controller.signal })
+        if (!response.ok) {
+          throw new Error(response.statusText)
+        }
         const json = await response.json()
+        switch (dataType) {
+          case 'team':
+            const ti = TeamInfoDataCompiler(json)
+            setData(ti)
+            break
+          case 'roster':
+            const r = rosterCompile(json.roster)
+            setData(r)
+            break
+          default:
+            break
+        }
+        setError(null)
         setIsPending(false)
-        setData(json)
       } catch (err) {
-        setError(err.message)
+        if (err.name === 'AbortError') {
+          console.log('the fetch was aborted')
+        } else {
+          setIsPending(false)
+          setError(err.message)
+        }
       }
     }
     fetchData()
-  }, [url])
+    return () => {
+      controller.abort()
+    }
+  }, [url, dataType])
   return { data, isPending, error }
 }
