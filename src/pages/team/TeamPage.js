@@ -43,7 +43,7 @@ const TeamPage = () => {
         {teamRoster &&
           teamRoster.map((player) => {
             return (
-              <div className='player_card_container'>
+              <div key={player.id} className='player_card_container'>
                 <p>{player.name}</p>
                 <Link to={`/${params.teamID}/${player.id}`}>
                   <i className='fa-solid fa-circle-info '></i>

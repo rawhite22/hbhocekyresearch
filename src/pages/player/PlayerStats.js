@@ -7,6 +7,7 @@ const PlayerStats = ({ stats }) => {
         return (
           <div key={gm.date}>
             <p>{gm.date}</p>
+            <p>{gm.goals}</p>
           </div>
         )
       })}

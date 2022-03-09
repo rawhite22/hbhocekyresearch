@@ -7,7 +7,11 @@ const TeamSelect = () => {
     <div className='container'>
       {TeamInfo.map((team) => {
         const teamNameUrl = team.name.replace(/\s/g, '').toLowerCase()
-        return <Link to={`/${team.id}`}>{team.name}</Link>
+        return (
+          <Link key={team.id} to={`/${team.id}`}>
+            {team.name}
+          </Link>
+        )
       })}
     </div>
   )
