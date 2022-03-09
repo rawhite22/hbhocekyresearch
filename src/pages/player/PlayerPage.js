@@ -4,6 +4,7 @@ import { useFetch } from '../../hooks/useFetch'
 import PlayerRanks from './PlayerRanks'
 import GoalieRanks from './GoalieRanks'
 import PlayerStats from './PlayerStats'
+import GoalieStats from './GoalieStats'
 
 const PlayerPage = () => {
   const params = useParams()
@@ -40,7 +41,10 @@ const PlayerPage = () => {
             <PlayerStats stats={playerStatsLastTen} />
           </>
         ) : (
-          <GoalieRanks ranks={playerRankings} />
+          <>
+            <GoalieRanks ranks={playerRankings} />
+            <GoalieStats stats={playerStatsLastTen} />
+          </>
         )}
       </div>
       <div className='last_ten_container'></div>

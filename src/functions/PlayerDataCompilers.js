@@ -14,8 +14,19 @@ export const playerStats = (data) => {
   if (!lastTen[0].stat.shifts) {
     let arr = []
     lastTen.forEach((game) => {
-      console.log(game)
+      const statObj = {
+        date: game.date,
+        stats: {
+          saves: game.stat.saves,
+          savePct: game.stat.savePercentage,
+          shutouts: game.stat.shutouts,
+          decision: game.stat.decision,
+          goalsAgainst: game.stat.goalsAgainst,
+        },
+      }
+      arr.push(statObj)
     })
+    return arr
   } else {
     let arr = []
     lastTen.forEach((game) => {

@@ -1,6 +1,7 @@
 import React from 'react'
 // hooks
 import { Link, useParams } from 'react-router-dom'
+import { Anchor } from '../../components/styles'
 import { useFetch } from '../../hooks/useFetch'
 // components
 
@@ -45,9 +46,11 @@ const TeamPage = () => {
             return (
               <div key={player.id} className='player_card_container'>
                 <p>{player.name}</p>
-                <Link to={`/${params.teamID}/${player.id}`}>
+                <Anchor
+                  to={`/${params.teamID}/${player.id}`}
+                  state={{ teamId: params.teamID }}>
                   <i className='fa-solid fa-circle-info '></i>
-                </Link>
+                </Anchor>
               </div>
             )
           })}
