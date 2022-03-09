@@ -3,6 +3,11 @@ import {
   TeamInfoDataCompiler,
   rosterCompile,
 } from '../functions/TeamDataCompiler'
+import {
+  playerInfo,
+  playerStats,
+  playerRankings,
+} from '../functions/PlayerDataCompilers'
 
 export const useFetch = (url, dataType) => {
   const [data, setData] = useState(null)
@@ -26,6 +31,16 @@ export const useFetch = (url, dataType) => {
           case 'roster':
             const r = rosterCompile(json.roster)
             setData(r)
+            break
+          case 'playerInfo':
+            const pi = playerInfo(json.people)
+            setData(pi)
+            break
+          case 'playerRankings':
+            setData(playerRankings(json.stats[0].splits[0].stat))
+            break
+          case 'playerStats':
+            setData(playerStats(json))
             break
           default:
             break

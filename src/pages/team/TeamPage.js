@@ -1,6 +1,6 @@
 import React from 'react'
 // hooks
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useFetch } from '../../hooks/useFetch'
 // components
 
@@ -31,7 +31,7 @@ const TeamPage = () => {
   return (
     <div className='team_page_container'>
       <div className='team_stats_container'>
-        <p>{name}</p>
+        <p>{name} </p>
         <p>Goals For: {gpg} per game</p>
         <p>Goals Against: {gapg} per game</p>
         <p>Powerplay: {ppp}%</p>
@@ -45,7 +45,9 @@ const TeamPage = () => {
             return (
               <div className='player_card_container'>
                 <p>{player.name}</p>
-                <i className='fa-solid fa-circle-info'></i>
+                <Link to={`/${params.teamID}/${player.id}`}>
+                  <i className='fa-solid fa-circle-info '></i>
+                </Link>
               </div>
             )
           })}
