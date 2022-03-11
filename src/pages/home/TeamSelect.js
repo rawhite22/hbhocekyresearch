@@ -1,31 +1,26 @@
 import React from 'react'
-import styled from 'styled-components'
+import {
+  TeamSelectContainer,
+  TeamContainer,
+} from '../../styles/pages/TeamSelect.styles'
 import { Anchor } from '../../components/styles'
 import { TeamInfo } from '../../data'
 
-const TeamSelectContainer = styled.section`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-`
-const TeamContainer = styled.div`
-  display: flex;
-  img {
-    height: 50px;
-  }
-`
-
 const TeamSelect = () => {
+  console.log(window.innerWidth)
   return (
     <TeamSelectContainer>
       {TeamInfo.map((team) => {
-        const teamNameUrl = team.name.replace(/\s/g, '').toLowerCase()
         return (
           <TeamContainer key={team.id}>
+            <div className='team-name-container'>
+              <Anchor to={`/${team.id}`} state={{ team: team.id }}>
+                {team.name}
+              </Anchor>
+            </div>
             <Anchor to={`/${team.id}`} state={{ team: team.id }}>
-              {team.name}
+              <img src={team.logo} alt='team logo' />
             </Anchor>
-            <img src={team.logo} alt='team logo' />
           </TeamContainer>
         )
       })}

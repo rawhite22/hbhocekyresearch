@@ -8,6 +8,7 @@ import PlayerStats from './PlayerStats'
 import GoalieStats from './GoalieStats'
 import { CompareContainer } from './PlayerPage.styles'
 import { playerSelect } from '../../actions/playerCompare.actions'
+import { compareCompiler } from '../../functions/PlayerDataCompilers'
 const PlayerPage = () => {
   const dispatch = useDispatch()
   const { comparePlayers } = useSelector((state) => state)
@@ -33,13 +34,15 @@ const PlayerPage = () => {
   if (isPending || isPendingRanks || isPendingStats) {
     return <p>Loading...</p>
   }
+  const compareStats = compareCompiler(playerInfo, playerStatsLastTen)
 
   return (
     <div className='playerpage_container'>
       <CompareContainer>
+        {}
         <p>add to compare</p>
         <i
-          onClick={() => dispatch(playerSelect(playerInfo, comparePlayers))}
+          onClick={() => dispatch(playerSelect(compareStats, comparePlayers))}
           className='fa-solid fa-ballot-check'></i>
       </CompareContainer>
       <div className='player_info_container'>

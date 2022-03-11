@@ -36,17 +36,27 @@ export const playerStats = (data) => {
         blocked,
         goals,
         hits,
+        shots,
         evenTimeOnIce,
         powerPlayTimeOnIce,
         powerPlayPoints,
         shortHandedPoints,
         pim,
-        plusMinues,
+        plusMinus,
       } = stat
       const statObj = {
         date,
-        goals,
         assists,
+        blocked,
+        goals,
+        hits,
+        evenTimeOnIce,
+        powerPlayTimeOnIce,
+        powerPlayPoints,
+        shortHandedPoints,
+        pim,
+        plusMinus,
+        shots,
       }
       arr.push(statObj)
     })
@@ -77,4 +87,31 @@ export const playerRankings = (data) => {
     }
     return skaterRankings
   }
+}
+
+export const compareCompiler = (info, lastTen) => {
+  const q = {}
+  q.name = info.name
+  q.id = info.id
+  const g = (lastTen, category) => {
+    let n = []
+    lastTen.forEach((game) => {
+      n.push(game[category])
+    })
+    return n.reduce((a, b) => a + b) / 10
+  }
+
+  q.stats = {
+    goals: g(lastTen, 'goals'),
+    assists: g(lastTen, 'assists'),
+    blocks: g(lastTen, 'blocked'),
+    hits: g(lastTen, 'hits'),
+    plusMinus: g(lastTen, 'plusMinus'),
+    penatlyMinutes: g(lastTen, 'pim'),
+    powerPlayPoints: g(lastTen, 'powerPlayPoints'),
+    shp: g(lastTen, 'shortHandedPoints'),
+    shots: g(lastTen, 'shots'),
+  }
+
+  return q
 }
