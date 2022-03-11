@@ -1,10 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const PlayerAverages = ({ stats, name, position }) => {
   if (position === 'Goalie') {
     return (
       <div>
-        <h3>{name}</h3>
+        <Link to={`/`}>
+          <h3>{name}</h3>
+        </Link>
         <p>saves:{stats.saves}</p>
         <p>goals against:{stats.ga}</p>
         <p>sv%:{stats.svPct}</p>
@@ -14,7 +17,9 @@ const PlayerAverages = ({ stats, name, position }) => {
   }
   return (
     <div>
-      <h3>{name}</h3>
+      <Link to={`/`}>
+        <h3>{name}</h3>
+      </Link>
       <p>goals: {stats.goals}</p>
       <p>assists: {stats.assists}</p>
       <p>shots: {stats.shots}</p>

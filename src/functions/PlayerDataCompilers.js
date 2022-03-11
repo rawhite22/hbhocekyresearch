@@ -123,12 +123,13 @@ export const compareCompiler = (info, lastTen) => {
     }
   }
   if (info.position === 'Goalie') {
-    console.log(lastTen)
     q.stats = {
       saves: g(lastTen, 'saves'),
       ga: g(lastTen, 'goalsAgainst'),
       svPct: g(lastTen, 'savePct').toFixed(2),
       so: g(lastTen, 'shutouts'),
+
+      d: g(lastTen, 'decision'),
     }
   }
   return q
