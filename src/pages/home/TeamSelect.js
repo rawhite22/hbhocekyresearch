@@ -1,23 +1,23 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import {
   TeamSelectContainer,
   TeamContainer,
 } from '../../styles/pages/TeamSelect.styles'
-import { Anchor } from '../../components/styles'
+
 import { TeamInfo } from '../../data'
+import { Link } from 'react-router-dom'
 
 const TeamSelect = () => {
-  console.log(window.innerWidth)
   return (
     <TeamSelectContainer>
       {TeamInfo.map((team) => {
         return (
           <TeamContainer key={team.id}>
-            <Anchor to={`/${team.id}`} state={{ team: team.id }}>
+            <Link to={`/${team.id}`} state={{ team: team.id }}>
               <img src={team.logo} alt='team logo' />
-            </Anchor>
+            </Link>
             <div className='team-name-container'>
-              <p> {team.name}</p>
+              <h3> {team.name}</h3>
             </div>
           </TeamContainer>
         )

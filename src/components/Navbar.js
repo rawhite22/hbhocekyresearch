@@ -1,29 +1,28 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
-import { Anchor } from './styles'
+import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
   const location = useLocation()
   if (!location.state) {
     return (
       <div style={{ height: '5vh' }}>
-        <Anchor to='/'>Hudson Boys Fantasy Hockey Research</Anchor>
+        <Link to='/'>Hudson Boys Fantasy Hockey Research</Link>
       </div>
     )
   } else if (location.state.team) {
     return (
       <div style={{ height: '5vh' }}>
-        <Anchor to='/'>Team Select</Anchor>
+        <Link to='/'>Team Select</Link>
       </div>
     )
   } else if (location.state.teamId) {
     return (
       <div style={{ height: '5vh' }}>
-        <Anchor
+        <Link
           state={{ team: location.state.teamId }}
           to={`/${location.state.teamId}`}>
           back to team
-        </Anchor>
+        </Link>
       </div>
     )
   }

@@ -15,11 +15,24 @@ export const TeamContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  a {
+    text-decoration: none;
+    color: #f0f1ee;
+    background-color: #171717;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 13px -2px rgba(0, 0, 0, 0.58);
+    padding: 10px;
+  }
   img {
-    height: 50px;
+    height: 120px;
   }
   // media queries
   @media screen and (max-width: 600px) {
+    img {
+      height: 60px;
+    }
     .team-name-container {
       display: none;
     }

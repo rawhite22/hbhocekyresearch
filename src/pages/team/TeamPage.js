@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // hooks
 import { Link, useParams } from 'react-router-dom'
-import { Anchor } from '../../components/styles'
+
 import { useFetch } from '../../hooks/useFetch'
-import { FilterContainer } from './TeamPage.styles'
+import { FilterContainer } from './styles/TeamPage.styles'
 import {
   sortByJerseyNumber,
   filterPlayers,
 } from '../../functions/TeamDataCompiler'
+import { TeamPageContainer } from '../../styles/pages/TeamPage.styles'
+import TeamStats from './components/TeamStats'
 // components
 
 const rosterFilter = ['All', 'Forward', 'Defenseman', 'Goalie']
@@ -38,19 +40,10 @@ const TeamPage = () => {
   const sortJerNum = sortByJerseyNumber(teamRoster)
   const roster = filterPlayers(sortJerNum, filter)
   const { name, stats } = teamInfo
-  const { gpg, gapg, ppp, pkp, shpg, shapg } = stats
 
   return (
-    <div className='team_page_container'>
-      <div className='team_stats_container'>
-        <p>{name} </p>
-        <p>Goals For: {gpg} per game</p>
-        <p>Goals Against: {gapg} per game</p>
-        <p>Powerplay: {ppp}%</p>
-        <p>Penalty Kill: {pkp}%</p>
-        <p>Shots For: {shpg}</p>
-        <p>Shots Against: {shapg}</p>
-      </div>
+    <TeamPageContainer>
+      <TeamStats name={name} stats={stats} />
       <FilterContainer>
         {rosterFilter.map((selector) => (
           <p key={selector} onClick={() => setFilter(selector)}>
@@ -64,16 +57,16 @@ const TeamPage = () => {
             return (
               <div key={player.id} className='player_card_container'>
                 <p>{player.name}</p>
-                <Anchor
+                <Link
                   to={`/${params.teamID}/${player.id}`}
                   state={{ teamId: params.teamID }}>
                   <i className='fa-solid fa-circle-info '></i>
-                </Anchor>
+                </Link>
               </div>
             )
           })}
       </div>
-    </div>
+    </TeamPageContainer>
   )
 }
 
