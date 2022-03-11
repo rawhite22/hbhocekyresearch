@@ -1,12 +1,17 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useFetch } from '../../hooks/useFetch'
 import PlayerRanks from './PlayerRanks'
 import GoalieRanks from './GoalieRanks'
 import PlayerStats from './PlayerStats'
 import GoalieStats from './GoalieStats'
-
+import { CompareContainer } from './PlayerPage.styles'
+import { playerSelect } from '../../actions/playerCompare.actions'
 const PlayerPage = () => {
+  const dispatch = useDispatch()
+  const { comparePlayers } = useSelector((state) => state)
+
   const params = useParams()
   const {
     data: playerInfo,
@@ -31,6 +36,12 @@ const PlayerPage = () => {
 
   return (
     <div className='playerpage_container'>
+      <CompareContainer>
+        <p>add to compare</p>
+        <i
+          onClick={() => dispatch(playerSelect(playerInfo, comparePlayers))}
+          className='fa-solid fa-ballot-check'></i>
+      </CompareContainer>
       <div className='player_info_container'>
         <p>{playerInfo.name}</p>
       </div>

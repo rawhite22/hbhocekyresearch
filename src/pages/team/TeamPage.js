@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 // hooks
 import { Link, useParams } from 'react-router-dom'
 import { Anchor } from '../../components/styles'
 import { useFetch } from '../../hooks/useFetch'
+import { FilterContainer } from './TeamPage.styles'
+import {
+  sortByJerseyNumber,
+  filterPlayers,
+} from '../../functions/TeamDataCompiler'
 // components
 
+const rosterFilter = ['All', 'Forward', 'Defenseman', 'Goalie']
+
 const TeamPage = () => {
+  const [filter, setFilter] = useState('All')
   const params = useParams()
   const {
     data: teamInfo,
@@ -27,8 +35,11 @@ const TeamPage = () => {
     return <p>Loading</p>
   }
 
+  const sortJerNum = sortByJerseyNumber(teamRoster)
+  const roster = filterPlayers(sortJerNum, filter)
   const { name, stats } = teamInfo
   const { gpg, gapg, ppp, pkp, shpg, shapg } = stats
+
   return (
     <div className='team_page_container'>
       <div className='team_stats_container'>
@@ -40,9 +51,16 @@ const TeamPage = () => {
         <p>Shots For: {shpg}</p>
         <p>Shots Against: {shapg}</p>
       </div>
+      <FilterContainer>
+        {rosterFilter.map((selector) => (
+          <p key={selector} onClick={() => setFilter(selector)}>
+            {selector}
+          </p>
+        ))}
+      </FilterContainer>
       <div className='team_roster_container'>
         {teamRoster &&
-          teamRoster.map((player) => {
+          roster.map((player) => {
             return (
               <div key={player.id} className='player_card_container'>
                 <p>{player.name}</p>
