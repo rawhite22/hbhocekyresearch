@@ -56,7 +56,7 @@ export const sortByJerseyNumber = (roster) => {
   })
   const compareArr = (arr1, arr2) => {
     let orderedTeam = []
-    if (arr1.length != arr2.length) {
+    if (arr1.length !== arr2.length) {
       return false
     } else {
       for (let i = 0; i < arr1.length; i++) {
