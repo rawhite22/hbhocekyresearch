@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { useFetch } from '../../hooks/useFetch'
-import { FilterContainer } from './styles/TeamPage.styles'
+import FilterContainer from './components/FilterContainer'
 import {
   sortByJerseyNumber,
   filterPlayers,
@@ -44,13 +44,7 @@ const TeamPage = () => {
   return (
     <TeamPageContainer>
       <TeamStats name={name} stats={stats} />
-      <FilterContainer>
-        {rosterFilter.map((selector) => (
-          <p key={selector} onClick={() => setFilter(selector)}>
-            {selector}
-          </p>
-        ))}
-      </FilterContainer>
+      <FilterContainer setFilter={setFilter} />
       <div className='team_roster_container'>
         {teamRoster &&
           roster.map((player) => {

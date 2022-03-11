@@ -1,10 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import PlayerAverages from './PlayerAverages'
+import PlayerAverages from './components/PlayerAverages'
 
 const Compare = () => {
   const { comparePlayers } = useSelector((state) => state)
-  console.log(comparePlayers)
+
   if (comparePlayers.length === 0) {
     return <p>please select player to compare</p>
   }
@@ -16,6 +16,7 @@ const Compare = () => {
             key={player.id}
             stats={player.stats}
             name={player.name}
+            position={player.position}
           />
         )
       })}

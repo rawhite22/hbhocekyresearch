@@ -93,25 +93,43 @@ export const compareCompiler = (info, lastTen) => {
   const q = {}
   q.name = info.name
   q.id = info.id
+  q.position = info.position
   const g = (lastTen, category) => {
     let n = []
-    lastTen.forEach((game) => {
-      n.push(game[category])
-    })
-    return n.reduce((a, b) => a + b) / 10
+    if (info.position === 'Goalie') {
+      lastTen.forEach((game) => {
+        n.push(game.stats[category])
+      })
+      return n.reduce((a, b) => a + b) / 10
+    } else {
+      lastTen.forEach((game) => {
+        n.push(game[category])
+      })
+      return n.reduce((a, b) => a + b) / 10
+    }
   }
 
-  q.stats = {
-    goals: g(lastTen, 'goals'),
-    assists: g(lastTen, 'assists'),
-    blocks: g(lastTen, 'blocked'),
-    hits: g(lastTen, 'hits'),
-    plusMinus: g(lastTen, 'plusMinus'),
-    penatlyMinutes: g(lastTen, 'pim'),
-    powerPlayPoints: g(lastTen, 'powerPlayPoints'),
-    shp: g(lastTen, 'shortHandedPoints'),
-    shots: g(lastTen, 'shots'),
+  if (info.position !== 'Goalie') {
+    q.stats = {
+      goals: g(lastTen, 'goals'),
+      assists: g(lastTen, 'assists'),
+      blocks: g(lastTen, 'blocked'),
+      hits: g(lastTen, 'hits'),
+      plusMinus: g(lastTen, 'plusMinus'),
+      penatlyMinutes: g(lastTen, 'pim'),
+      powerPlayPoints: g(lastTen, 'powerPlayPoints'),
+      shp: g(lastTen, 'shortHandedPoints'),
+      shots: g(lastTen, 'shots'),
+    }
   }
-
+  if (info.position === 'Goalie') {
+    console.log(lastTen)
+    q.stats = {
+      saves: g(lastTen, 'saves'),
+      ga: g(lastTen, 'goalsAgainst'),
+      svPct: g(lastTen, 'savePct').toFixed(2),
+      so: g(lastTen, 'shutouts'),
+    }
+  }
   return q
 }
