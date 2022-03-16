@@ -1,54 +1,32 @@
 import React, { useState, useEffect } from 'react'
 // hooks
+import useTeamFetch from '../../hooks/useTeamFetch'
 import { Link, useParams } from 'react-router-dom'
-
-import { useFetch } from '../../hooks/useFetch'
-import FilterContainer from './components/FilterContainer'
-import {
-  sortByJerseyNumber,
-  filterPlayers,
-} from '../../functions/TeamDataCompiler'
-import { TeamPageContainer } from '../../styles/pages/TeamPage.styles'
-import TeamStats from './components/TeamStats'
+import { useSelector } from 'react-redux'
 // components
-
-const rosterFilter = ['All', 'Forward', 'Defenseman', 'Goalie']
+import FilterContainer from './components/FilterContainer'
+import TeamStats from './components/TeamStats'
+// styles
+import { TeamPageContainer } from '../../styles/pages/TeamPage.styles'
 
 const TeamPage = () => {
   const [filter, setFilter] = useState('All')
   const params = useParams()
-  const {
-    data: teamInfo,
-    isPending,
-    error,
-  } = useFetch(
-    `https://statsapi.web.nhl.com/api/v1/teams/${params.teamID}?expand=team.stats`,
-    'team'
-  )
-  const {
-    data: teamRoster,
-    isPending: rosterPending,
-    error: rosterError,
-  } = useFetch(
-    `https://statsapi.web.nhl.com/api/v1/teams/${params.teamID}/roster`,
-    'roster'
-  )
-  if (isPending || rosterPending) {
+  const { loading, teamInfo, roster } = useSelector((state) => state.teamStats)
+  useTeamFetch(params.teamID)
+
+  if (loading) {
     return <p>Loading</p>
   }
 
-  const sortJerNum = sortByJerseyNumber(teamRoster)
-  const roster = filterPlayers(sortJerNum, filter)
-  const { name, stats } = teamInfo
-
   return (
     <TeamPageContainer>
-      <TeamStats name={name} stats={stats} />
+      <TeamStats name={teamInfo.name} stats={teamInfo.stats} />
       <FilterContainer filter={filter} setFilter={setFilter} />
       <div
         className='team_roster_container'
         style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {teamRoster &&
+        {!loading &&
           roster.map((player) => {
             return (
               <div
