@@ -1,22 +1,32 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const StyledGoalieStats = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+`
+const StyledStatCard = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 const GoalieStats = ({ stats }) => {
   return (
-    <div>
+    <StyledGoalieStats>
       {stats &&
         stats.map((stat) => {
           return (
-            <div key={stat.date}>
-              <p>{stat.date}</p>
-              <p>{stat.stats.decision}</p>
-              <p>{stat.stats.saves}</p>
-              <p>{stat.stats.goalAgainst}</p>
-              <p>{stat.stats.savePct}</p>
-              <p>{stat.stats.shutouts}</p>
-            </div>
+            <StyledStatCard key={stat.date}>
+              <p>date: {stat.date}</p>
+              <p>w/l: {stat.stats.decision}</p>
+              <p>saves: {stat.stats.saves}</p>
+              <p>gaa: {stat.stats.goalsAgainst}</p>
+              <p>sv%: {stat.stats.savePct}</p>
+              <p>shutout: {stat.stats.shutouts}</p>
+            </StyledStatCard>
           )
         })}
-    </div>
+    </StyledGoalieStats>
   )
 }
 

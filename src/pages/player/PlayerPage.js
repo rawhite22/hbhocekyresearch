@@ -39,16 +39,13 @@ const PlayerPage = () => {
   return (
     <div className='playerpage_container'>
       <CompareContainer>
-        {}
+        <p>{playerInfo.name}</p>
         <p>add to compare</p>
         <i
           onClick={() => dispatch(playerSelect(compareStats, comparePlayers))}
           className='fa-solid fa-ballot-check'></i>
       </CompareContainer>
-      <div className='player_info_container'>
-        <p>{playerInfo.name}</p>
-      </div>
-      <div className='player_ranks_container'>
+      <div style={{ height: '100%' }} className='player_ranks_container'>
         {playerInfo.position !== 'Goalie' ? (
           <>
             <PlayerRanks ranks={playerRankings} />

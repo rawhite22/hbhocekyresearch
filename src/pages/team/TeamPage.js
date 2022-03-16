@@ -44,13 +44,21 @@ const TeamPage = () => {
   return (
     <TeamPageContainer>
       <TeamStats name={name} stats={stats} />
-      <FilterContainer setFilter={setFilter} />
-      <div className='team_roster_container'>
+      <FilterContainer filter={filter} setFilter={setFilter} />
+      <div
+        className='team_roster_container'
+        style={{ display: 'flex', flexWrap: 'wrap' }}>
         {teamRoster &&
           roster.map((player) => {
             return (
-              <div key={player.id} className='player_card_container'>
+              <div
+                key={player.id}
+                className='player_card_container'
+                style={{ height: '200px', width: '100px' }}>
                 <p>{player.name}</p>
+                <p>{player.number}</p>
+                <p>{player.postion.code}</p>
+
                 <Link
                   to={`/${params.teamID}/${player.id}`}
                   state={{ teamId: params.teamID }}>

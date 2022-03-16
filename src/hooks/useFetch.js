@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+
 import {
   TeamInfoDataCompiler,
   rosterCompile,
@@ -8,8 +9,11 @@ import {
   playerStats,
   playerRankings,
 } from '../functions/PlayerDataCompilers'
+import { getRoster, getTeamStats } from '../actions/getTeamStats.actions'
+import { useDispatch } from 'react-redux'
 
 export const useFetch = (url, dataType) => {
+  const dispatch = useDispatch()
   const [data, setData] = useState(null)
   const [isPending, setIsPending] = useState(true)
   const [error, setError] = useState(null)
@@ -26,10 +30,12 @@ export const useFetch = (url, dataType) => {
         switch (dataType) {
           case 'team':
             const ti = TeamInfoDataCompiler(json)
+            dispatch(getTeamStats(ti))
             setData(ti)
             break
           case 'roster':
             const r = rosterCompile(json.roster)
+            dispatch(getRoster(r))
             setData(r)
             break
           case 'playerInfo':
@@ -46,6 +52,7 @@ export const useFetch = (url, dataType) => {
             break
         }
         setError(null)
+        dispatch({ type: 'SET_LOADING_FALSE' })
         setIsPending(false)
       } catch (err) {
         if (err.name === 'AbortError') {
