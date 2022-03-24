@@ -1,64 +1,32 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useFetch } from '../../hooks/useFetch'
-import PlayerRanks from './PlayerRanks'
-import GoalieRanks from './GoalieRanks'
-import PlayerStats from './PlayerStats'
-import GoalieStats from './GoalieStats'
-import { CompareContainer } from './PlayerPage.styles'
-import { playerSelect } from '../../actions/playerCompare.actions'
-import { compareCompiler } from '../../functions/PlayerDataCompilers'
+
+import usePlayerFetch from '../../hooks/usePlayerFetch'
+import PlayerInfo from './components/PlayerInfo'
+import PlayerLastTen from './components/PlayerLastTen'
+import PlayerRankings from './components/PlayerRankings'
 const PlayerPage = () => {
-  const dispatch = useDispatch()
-  const { comparePlayers } = useSelector((state) => state)
-
   const params = useParams()
-  const {
-    data: playerInfo,
-    isPending,
-    error,
-  } = useFetch(
-    `https://statsapi.web.nhl.com/api/v1/people/${params.playerID}`,
-    'playerInfo'
-  )
-  const { data: playerRankings, isPending: isPendingRanks } = useFetch(
-    `https://statsapi.web.nhl.com/api/v1/people/${params.playerID}/stats?stats=regularSeasonStatRankings&season=20212022`,
-    'playerRankings'
-  )
-  const { data: playerStatsLastTen, isPending: isPendingStats } = useFetch(
-    `https://statsapi.web.nhl.com/api/v1/people/${params.playerID}/stats?stats=gameLog&season=20212022`,
-    'playerStats'
-  )
+  const { playerInfo } = useSelector((state) => state)
+  const { comparePlayers } = useSelector((state) => state)
+  const { error } = usePlayerFetch(params)
 
-  if (isPending || isPendingRanks || isPendingStats) {
-    return <p>Loading...</p>
+  if (playerInfo.loading) {
+    return <div>loading...</div>
   }
-  const compareStats = compareCompiler(playerInfo, playerStatsLastTen)
 
   return (
-    <div className='playerpage_container'>
-      <CompareContainer>
-        <p>{playerInfo.name}</p>
-        <p>add to compare</p>
-        <i
-          onClick={() => dispatch(playerSelect(compareStats, comparePlayers))}
-          className='fa-solid fa-ballot-check'></i>
-      </CompareContainer>
-      <div style={{ height: '100%' }} className='player_ranks_container'>
-        {playerInfo.position !== 'Goalie' ? (
-          <>
-            <PlayerRanks ranks={playerRankings} />
-            <PlayerStats stats={playerStatsLastTen} />
-          </>
-        ) : (
-          <>
-            <GoalieRanks ranks={playerRankings} />
-            <GoalieStats stats={playerStatsLastTen} />
-          </>
-        )}
-      </div>
-      <div className='last_ten_container'></div>
+    <div className='playerpage_container' style={{ padding: '1rem' }}>
+      <PlayerInfo info={playerInfo.playerInfo.info} />
+      <PlayerRankings
+        position={playerInfo.playerInfo.info.primaryPosition.code}
+        rankings={playerInfo.playerInfo.rankings}
+      />
+      <PlayerLastTen
+        position={playerInfo.playerInfo.info.primaryPosition.code}
+        lastTen={playerInfo.playerInfo.lastTen}
+      />
     </div>
   )
 }

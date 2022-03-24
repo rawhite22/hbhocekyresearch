@@ -134,3 +134,31 @@ export const compareCompiler = (info, lastTen) => {
   }
   return q
 }
+
+// new
+
+export const lastTenFunc = (lTen) => {
+  const games = []
+  lTen.forEach((game) => {
+    const gameObj = {
+      date: game.date,
+      isWin: game.isWin,
+      isOT: game.isOT,
+      assists: game.stat.assists,
+      blocked: game.stat.blocked,
+      gameWinningGoals: game.stat.gameWinningGoals,
+      goals: game.stat.goals,
+      hits: game.stat.hits,
+      overTimeGoals: game.stat.overTimeGoals,
+      pim: game.stat.pim,
+      plusMinus: game.stat.plusMinus,
+      powerPlayGoals: game.stat.powerPlayGoals,
+      powerPlayPoints: game.stat.powerPlayPoints,
+      shots: game.stat.shots,
+      shortHandedGoals: game.stat.shortHandedGoals,
+      shortHandedPoints: game.stat.shortHandedPoints,
+    }
+    games.push(gameObj)
+  })
+  return games
+}

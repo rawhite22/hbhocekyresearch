@@ -5,19 +5,26 @@ import { Link, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 // components
 import FilterContainer from './components/FilterContainer'
+// funcs
+import { filterPlayers } from '../../functions/TeamDataCompiler'
 import TeamStats from './components/TeamStats'
 // styles
-import { TeamPageContainer } from '../../styles/pages/TeamPage.styles'
-
+import styled from 'styled-components'
+const TeamPageContainer = styled.section`
+  padding: 1rem;
+`
+// Component
 const TeamPage = () => {
   const [filter, setFilter] = useState('All')
   const params = useParams()
   const { loading, teamInfo, roster } = useSelector((state) => state.teamStats)
-  useTeamFetch(params.teamID)
+  const { error } = useTeamFetch(params.teamID)
 
   if (loading) {
     return <p>Loading</p>
   }
+
+  const filteredRoster = filterPlayers(roster, filter)
 
   return (
     <TeamPageContainer>
@@ -27,7 +34,7 @@ const TeamPage = () => {
         className='team_roster_container'
         style={{ display: 'flex', flexWrap: 'wrap' }}>
         {!loading &&
-          roster.map((player) => {
+          filteredRoster.map((player) => {
             return (
               <div
                 key={player.id}

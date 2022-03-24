@@ -41,9 +41,10 @@ const useTeamFetch = (params) => {
         const r = rosterCompile(values[1].roster)
         dispatch(getRoster(r))
       })
-      .then(() => dispatch({ type: 'SET_LOADING_FALSE' }))
-      .catch((err) => console.log(err))
+      .then(() => dispatch({ type: 'SET_LOADING_FALSE_TI' }))
+      .catch((err) => setError(err.message))
   }, [])
+  return { error }
 }
 
 export default useTeamFetch

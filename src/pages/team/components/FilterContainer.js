@@ -8,18 +8,13 @@ const FilterContainer = ({ setFilter, filter }) => {
     setFilter(event.target.value)
   }
   return (
-    // <StyledFilterContainer>
-    //   {rosterFilter.map((selector) => (
-    //     <p key={selector} onClick={() => setFilter(selector)}>
-    //       {selector}
-    //     </p>
-    //   ))}
-    // </StyledFilterContainer>
     <div>
       <label>Sort By:</label>
       <select value={filter} onChange={handleChange}>
         {rosterFilter.map((o) => (
-          <option value={o}>{o}</option>
+          <option key={o} value={o}>
+            {o}
+          </option>
         ))}
       </select>
     </div>
