@@ -14,7 +14,8 @@ const usePlayerFetch = (params) => {
     const controller = new AbortController()
     const fetchPlayerInfo = async () => {
       const response = await fetch(
-        `https://statsapi.web.nhl.com/api/v1/people/${params.playerID}`
+        `https://statsapi.web.nhl.com/api/v1/people/${params.playerID}`,
+        { signal: controller.signal }
       )
       if (!response.ok) {
         throw new Error(response.statusText)
@@ -25,7 +26,8 @@ const usePlayerFetch = (params) => {
     }
     const fetchPlayerRankings = async () => {
       const response = await fetch(
-        `https://statsapi.web.nhl.com/api/v1/people/${params.playerID}/stats?stats=regularSeasonStatRankings&season=20212022`
+        `https://statsapi.web.nhl.com/api/v1/people/${params.playerID}/stats?stats=regularSeasonStatRankings&season=20212022`,
+        { signal: controller.signal }
       )
       if (!response.ok) {
         throw new Error(response.statusText)
@@ -35,7 +37,8 @@ const usePlayerFetch = (params) => {
     }
     const fetchPlayerGameLog = async () => {
       const response = await fetch(
-        `https://statsapi.web.nhl.com/api/v1/people/${params.playerID}/stats?stats=gameLog&season=20212022`
+        `https://statsapi.web.nhl.com/api/v1/people/${params.playerID}/stats?stats=gameLog&season=20212022`,
+        { signal: controller.signal }
       )
       if (!response.ok) {
         throw new Error(response.statusText)
@@ -54,8 +57,10 @@ const usePlayerFetch = (params) => {
         dispatch(getPlayerLastTen(values[2].stats[0].splits.slice(0, 10)))
       })
       .then(() => dispatch({ type: 'SET_LOADING_FALSE_PI' }))
-      .catch((err) => setError(err.message))
-  }, [])
+      .catch((err) => {
+        setError(err.message)
+      })
+  }, [dispatch, params.playerID])
   return { error }
 }
 

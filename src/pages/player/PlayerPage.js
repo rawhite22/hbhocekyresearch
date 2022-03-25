@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import usePlayerFetch from '../../hooks/usePlayerFetch'
@@ -10,11 +10,14 @@ import PlayerRankings from './components/PlayerRankings'
 const PlayerPage = () => {
   const params = useParams()
   const { playerInfo } = useSelector((state) => state)
-  const { comparePlayers } = useSelector((state) => state)
+
   const { error } = usePlayerFetch(params)
 
   if (playerInfo.loading) {
     return <div>loading...</div>
+  }
+  if (error) {
+    return <p>{error}</p>
   }
 
   return (

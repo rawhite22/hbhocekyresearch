@@ -1,5 +1,3 @@
-import { lastTenFunc } from '../functions/PlayerDataCompilers'
-
 export const getPlayerInfo = (playerInfo) => (dispatch) => {
   return dispatch({ type: 'GET_PLAYER_INFO', payload: playerInfo })
 }

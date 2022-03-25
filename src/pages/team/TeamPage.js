@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 // hooks
 import useTeamFetch from '../../hooks/useTeamFetch'
 import { Link, useParams } from 'react-router-dom'
@@ -22,6 +22,9 @@ const TeamPage = () => {
 
   if (loading) {
     return <p>Loading</p>
+  }
+  if (error) {
+    return <p>{error}</p>
   }
 
   const filteredRoster = filterPlayers(roster, filter)

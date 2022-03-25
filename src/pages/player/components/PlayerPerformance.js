@@ -20,7 +20,9 @@ const PlayerPerformance = ({ lastTen, position }) => {
           <p>block bonus: {dkTotals.blkb}</p>
           <p>3 point bonus: {dkTotals.pointB}</p>
           <p>shp: {dkTotals.shp}</p>
-          <p>Scoring average from last ten games: {tenGameAvg} points</p>
+          <p>
+            Scoring average from last ten games: {tenGameAvg} points per game.
+          </p>
         </div>
       </section>
     )
@@ -37,7 +39,9 @@ const PlayerPerformance = ({ lastTen, position }) => {
           <p>Shutout: {dkTotals.sho}</p>
           <p>Overtime Loss: {dkTotals.otl}</p>
           <p>35+ Save Bonus: {dkTotals.svb}</p>
-          <p>Scoring average from last ten games: {tenGameAvg} points</p>
+          <p>
+            Scoring average from last ten games: {tenGameAvg} points per game.
+          </p>
         </div>
       </section>
     )

@@ -87,10 +87,9 @@ export const draftKingsCompiler = (arr) => {
 }
 
 export const dkGoalieCompiler = (arr) => {
-  const winArr = []
   const svArr = []
   const gaArr = []
-  const shoArr = []
+
   // wins
   const wins = arr.filter((game) => {
     return game.isWin
@@ -102,7 +101,7 @@ export const dkGoalieCompiler = (arr) => {
   const svBonus = arr.filter((game) => {
     return game.stat.saves >= 35
   })
-  const saves = arr.forEach((game) => {
+  arr.forEach((game) => {
     svArr.push(game.stat.saves)
   })
   const svTotal = svArr.reduce((a, b) => a + b, 0)

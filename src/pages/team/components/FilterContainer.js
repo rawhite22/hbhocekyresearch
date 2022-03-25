@@ -1,5 +1,4 @@
 import React from 'react'
-import { StyledFilterContainer } from '../styles/TeamPage.styles'
 
 const rosterFilter = ['All', 'Forward', 'Defenseman', 'Goalie']
 
