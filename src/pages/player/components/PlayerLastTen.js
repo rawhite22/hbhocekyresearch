@@ -14,7 +14,6 @@ const Article = styled.article`
 `
 
 const PlayerLastTen = ({ lastTen, position }) => {
-  console.log(lastTen)
   if (position === 'G') {
     return (
       <Section>

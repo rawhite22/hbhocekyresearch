@@ -1,164 +1,138 @@
-export const playerInfo = (data) => {
-  const pi = {
-    id: data[0].id,
-    name: data[0].fullName,
-    position: data[0].primaryPosition.name,
-    rookie: data[0].rookie,
-  }
-  return pi
-}
-
-export const playerStats = (data) => {
-  const lastTen = data.stats[0].splits.splice(0, 10)
-
-  if (!lastTen[0].stat.shifts) {
-    let arr = []
-    lastTen.forEach((game) => {
-      const statObj = {
-        date: game.date,
-        stats: {
-          saves: game.stat.saves,
-          savePct: game.stat.savePercentage,
-          shutouts: game.stat.shutouts,
-          decision: game.stat.decision,
-          goalsAgainst: game.stat.goalsAgainst,
-        },
-      }
-      arr.push(statObj)
-    })
-    return arr
-  } else {
-    let arr = []
-    lastTen.forEach((game) => {
-      const { stat, date } = game
-      const {
-        assists,
-        blocked,
-        goals,
-        hits,
-        shots,
-        evenTimeOnIce,
-        powerPlayTimeOnIce,
-        powerPlayPoints,
-        shortHandedPoints,
-        pim,
-        plusMinus,
-      } = stat
-      const statObj = {
-        date,
-        assists,
-        blocked,
-        goals,
-        hits,
-        evenTimeOnIce,
-        powerPlayTimeOnIce,
-        powerPlayPoints,
-        shortHandedPoints,
-        pim,
-        plusMinus,
-        shots,
-      }
-      arr.push(statObj)
-    })
-    return arr
-  }
-}
-
-export const playerRankings = (data) => {
-  if (data.wins) {
-    const goalieRankings = {
-      gaa: data.goalsAgainstAverage,
-      svpct: data.savePercentage,
-      sv: data.saves,
-      saavg: data.shotsAgainst,
-      so: data.shutOuts,
-      w: data.wins,
-    }
-    return goalieRankings
-  } else {
-    const skaterRankings = {
-      g: data.rankGoals,
-      a: data.rankAssists,
-      h: data.rankHits,
-      bs: data.rankBlockedShots,
-      s: data.rankShots,
-      ppg: data.rankPowerPlayGoals,
-      pm: data.rankPlusMinus,
-    }
-    return skaterRankings
-  }
-}
-
-export const compareCompiler = (info, lastTen) => {
-  const q = {}
-  q.name = info.name
-  q.id = info.id
-  q.position = info.position
-  const g = (lastTen, category) => {
-    let n = []
-    if (info.position === 'Goalie') {
-      lastTen.forEach((game) => {
-        n.push(game.stats[category])
-      })
-      return n.reduce((a, b) => a + b) / 10
-    } else {
-      lastTen.forEach((game) => {
-        n.push(game[category])
-      })
-      return n.reduce((a, b) => a + b) / 10
-    }
-  }
-
-  if (info.position !== 'Goalie') {
-    q.stats = {
-      goals: g(lastTen, 'goals'),
-      assists: g(lastTen, 'assists'),
-      blocks: g(lastTen, 'blocked'),
-      hits: g(lastTen, 'hits'),
-      plusMinus: g(lastTen, 'plusMinus'),
-      penatlyMinutes: g(lastTen, 'pim'),
-      powerPlayPoints: g(lastTen, 'powerPlayPoints'),
-      shp: g(lastTen, 'shortHandedPoints'),
-      shots: g(lastTen, 'shots'),
-    }
-  }
-  if (info.position === 'Goalie') {
-    q.stats = {
-      saves: g(lastTen, 'saves'),
-      ga: g(lastTen, 'goalsAgainst'),
-      svPct: g(lastTen, 'savePct').toFixed(2),
-      so: g(lastTen, 'shutouts'),
-
-      d: g(lastTen, 'decision'),
-    }
-  }
-  return q
-}
-
-// new
-
-export const lastTenFunc = (lTen) => {
-  const games = []
-  lTen.forEach((game) => {
-    const gameObj = {
-      date: game.date,
-      isWin: game.isWin,
-      isOT: game.isOT,
-      assists: game.stat.assists,
-      blocked: game.stat.blocked,
-      gameWinningGoals: game.stat.gameWinningGoals,
-      goals: game.stat.goals,
-      hits: game.stat.hits,
-      overTimeGoals: game.stat.overTimeGoals,
-      pim: game.stat.pim,
-      plusMinus: game.stat.plusMinus,
-      powerPlayGoals: game.stat.powerPlayGoals,
-      powerPlayPoints: game.stat.powerPlayPoints,
-      shots: game.stat.shots,
-      shortHandedGoals: game.stat.shortHandedGoals,
-      shortHandedPoints: game.stat.shortHandedPoints,
-    }
-    games.push(gameObj)
+export const draftKingsCompiler = (arr) => {
+  // data containers
+  const goalsArr = []
+  const assistsArr = []
+  const shotsArr = []
+  const blocksArr = []
+  const shpArr = []
+  // goals
+  const goals = arr.filter((game) => {
+    return game.stat.goals > 0
   })
-  return games
+  goals.forEach((game) => {
+    goalsArr.push(game.stat.goals)
+  })
+  // short handed points
+  const shp = arr.filter((game) => {
+    return game.stat.shortHandedPoints > 0
+  })
+  shp.forEach((game) => {
+    shpArr.push(game.stat.goals)
+  })
+  // assists
+  const assists = arr.filter((game) => {
+    return game.stat.assists > 0
+  })
+  assists.forEach((game) => {
+    assistsArr.push(game.stat.assists)
+  })
+  // shots
+  const shots = arr.filter((game) => {
+    return game.stat.shots > 0
+  })
+  shots.forEach((game) => {
+    shotsArr.push(game.stat.shots)
+  })
+  const shtBonus = shots.filter((game) => {
+    return game.stat.shots >= 5
+  })
+  // blocks
+  const blocks = arr.filter((game) => {
+    return game.stat.blocked > 0
+  })
+  const blkBonus = blocks.filter((game) => {
+    return game.stat.blocked >= 3
+  })
+  blocks.forEach((game) => {
+    blocksArr.push(game.stat.blocked)
+  })
+  // points
+  const points = arr.filter((game) => {
+    return game.stat.points >= 3
+  })
+
+  // totals
+  const goalTotal = goalsArr.reduce((a, b) => a + b, 0)
+  const assistTotal = assistsArr.reduce((a, b) => a + b, 0)
+  const shotTotal = shotsArr.reduce((a, b) => a + b, 0)
+  const blockTotal = blocksArr.reduce((a, b) => a + b, 0)
+  const shpTotal = shpArr.reduce((a, b) => a + b, 0)
+  const b = (blockTotal * 1.3) / 10
+  // obj
+  const dkTotals = {
+    g: (goalTotal * 8.5) / 10,
+    a: (assistTotal * 5) / 10,
+    sht: (shotTotal * 1.5) / 10,
+    shtb: (shtBonus.length * 3) / 10,
+    blk: Number(b.toFixed(1)),
+    blkb: (blkBonus.length * 3) / 10,
+    pointB: (points.length * 3) / 10,
+    shp: (shpTotal * 2) / 10,
+  }
+  const dkTotalsArr = [
+    dkTotals.a,
+    dkTotals.blk,
+    dkTotals.blkb,
+    dkTotals.g,
+    dkTotals.pointB,
+    dkTotals.shp,
+    dkTotals.sht,
+    dkTotals.shtb,
+  ]
+  const tga = dkTotalsArr.reduce((a, b) => {
+    return a + b
+  }, 0)
+  const tenGameAvg = Number(tga.toFixed(2))
+  return { dkTotals, tenGameAvg }
+}
+
+export const dkGoalieCompiler = (arr) => {
+  const winArr = []
+  const svArr = []
+  const gaArr = []
+  const shoArr = []
+  // wins
+  const wins = arr.filter((game) => {
+    return game.isWin
+  })
+  const otl = arr.filter((game) => {
+    return game.isWin && game.isOT
+  })
+  // saves
+  const svBonus = arr.filter((game) => {
+    return game.stat.saves >= 35
+  })
+  const saves = arr.forEach((game) => {
+    svArr.push(game.stat.saves)
+  })
+  const svTotal = svArr.reduce((a, b) => a + b, 0)
+  // goals against
+  const goalsAgainst = arr.filter((game) => {
+    return game.stat.goalsAgainst > 0
+  })
+  goalsAgainst.forEach((game) => {
+    gaArr.push(game.stat.goalsAgainst)
+  })
+  const gaTotal = (gaArr.reduce((a, b) => a + b, 0) / 10) * -3.5
+  console.log(goalsAgainst)
+  // totals
+  const dkTotals = {
+    w: (wins.length * 6) / 10,
+    sv: ((svTotal * 0.7) / 10) * 0.7,
+    ga: Number(gaTotal.toFixed(1)),
+    sho: (10 - goalsAgainst.length) / 10,
+    otl: (otl.length * 2) / 10,
+    svb: (svBonus.length * 3) / 10,
+  }
+  const dkTotalsArr = [
+    dkTotals.w,
+    dkTotals.sv,
+    dkTotals.ga,
+    dkTotals.sho,
+    dkTotals.otl,
+    dkTotals.svb,
+  ]
+  const tga = dkTotalsArr.reduce((a, b) => a + b, 0)
+  const tenGameAvg = Number(tga.toFixed(2))
+  return { dkTotals, tenGameAvg }
 }

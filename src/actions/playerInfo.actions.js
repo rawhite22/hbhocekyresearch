@@ -8,6 +8,5 @@ export const getPlayerRanks = (playerInfo) => (dispatch) => {
 }
 
 export const getPlayerLastTen = (playerInfo) => (dispatch) => {
-  const payload = lastTenFunc(playerInfo)
   return dispatch({ type: 'GET_PLAYER_LAST_TEN', payload: playerInfo })
 }

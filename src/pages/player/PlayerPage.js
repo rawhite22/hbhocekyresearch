@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import usePlayerFetch from '../../hooks/usePlayerFetch'
 import PlayerInfo from './components/PlayerInfo'
 import PlayerLastTen from './components/PlayerLastTen'
+import PlayerPerformance from './components/PlayerPerformance'
 import PlayerRankings from './components/PlayerRankings'
 const PlayerPage = () => {
   const params = useParams()
@@ -22,6 +23,10 @@ const PlayerPage = () => {
       <PlayerRankings
         position={playerInfo.playerInfo.info.primaryPosition.code}
         rankings={playerInfo.playerInfo.rankings}
+      />
+      <PlayerPerformance
+        position={playerInfo.playerInfo.info.primaryPosition.code}
+        lastTen={playerInfo.playerInfo.lastTen}
       />
       <PlayerLastTen
         position={playerInfo.playerInfo.info.primaryPosition.code}
