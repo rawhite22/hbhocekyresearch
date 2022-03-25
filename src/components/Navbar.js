@@ -15,14 +15,15 @@ const Header = styled.header`
 
 const Navbar = () => {
   const { playerInfo } = useSelector((state) => state.playerInfo)
+  const { teamInfo } = useSelector((state) => state.teamStats)
 
   return (
     <Header>
-      <Link to='/'>Hudson Boys</Link>
+      <Link to='/'>Team Select</Link>
       <nav>
         {playerInfo && (
           <Link to={`/${playerInfo.info.currentTeam.id}`}>
-            Current Selected Team: {playerInfo.info.currentTeam.name}
+            Current Selected Team: {teamInfo.name}
           </Link>
         )}
       </nav>
