@@ -1,8 +1,17 @@
 import React from 'react'
+// functions
 import {
   draftKingsCompiler,
   dkGoalieCompiler,
 } from '../../../functions/PlayerDataCompilers'
+// styles
+import styled from 'styled-components'
+
+const Span = styled.span`
+  color: ${(props) =>
+    props.score > 15 ? 'green' : props.score < 7 ? 'red' : '#c8d7e6'};
+`
+
 const PlayerPerformance = ({ lastTen, position }) => {
   if (position !== 'G') {
     const dkPTotals = draftKingsCompiler(lastTen)
@@ -21,7 +30,8 @@ const PlayerPerformance = ({ lastTen, position }) => {
           <p>3 point bonus: {dkTotals.pointB}</p>
           <p>shp: {dkTotals.shp}</p>
           <p>
-            Scoring average from last ten games: {tenGameAvg} points per game.
+            Scoring average from last ten games:{' '}
+            <Span score={tenGameAvg}>{tenGameAvg}</Span> points per game.
           </p>
         </div>
       </section>
@@ -40,7 +50,8 @@ const PlayerPerformance = ({ lastTen, position }) => {
           <p>Overtime Loss: {dkTotals.otl}</p>
           <p>35+ Save Bonus: {dkTotals.svb}</p>
           <p>
-            Scoring average from last ten games: {tenGameAvg} points per game.
+            Scoring average from last ten games:{' '}
+            <Span score={tenGameAvg}>{tenGameAvg}</Span> points per game.
           </p>
         </div>
       </section>

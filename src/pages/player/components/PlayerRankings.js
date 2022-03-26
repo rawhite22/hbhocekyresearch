@@ -1,7 +1,6 @@
 import React from 'react'
 
 const PlayerRankings = ({ rankings, position }) => {
-  console.log(rankings)
   if (position === 'G') {
     return (
       <div

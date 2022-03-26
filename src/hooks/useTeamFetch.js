@@ -43,7 +43,7 @@ const useTeamFetch = (params) => {
       })
       .then(() => dispatch({ type: 'SET_LOADING_FALSE_TI' }))
       .catch((err) => setError(err.message))
-  }, [])
+  }, [dispatch, params])
   return { error }
 }
 
