@@ -4,6 +4,7 @@ import {
   draftKingsCompiler,
   dkGoalieCompiler,
 } from '../../../functions/PlayerDataCompilers'
+
 // styles
 import styled from 'styled-components'
 
@@ -16,6 +17,7 @@ const PlayerPerformance = ({ lastTen, position }) => {
   if (position !== 'G') {
     const dkPTotals = draftKingsCompiler(lastTen)
     const { tenGameAvg, dkTotals } = dkPTotals
+
     return (
       <section>
         <h3>Performance</h3>

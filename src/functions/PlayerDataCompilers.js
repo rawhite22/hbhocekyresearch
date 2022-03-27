@@ -79,6 +79,7 @@ export const draftKingsCompiler = (arr) => {
     dkTotals.sht,
     dkTotals.shtb,
   ]
+
   const tga = dkTotalsArr.reduce((a, b) => {
     return a + b
   }, 0)
