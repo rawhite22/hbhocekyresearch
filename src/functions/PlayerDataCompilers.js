@@ -114,7 +114,7 @@ export const dkGoalieCompiler = (arr) => {
     gaArr.push(game.stat.goalsAgainst)
   })
   const gaTotal = (gaArr.reduce((a, b) => a + b, 0) / 10) * -3.5
-  console.log(goalsAgainst)
+
   // totals
   const dkTotals = {
     w: (wins.length * 6) / 10,
