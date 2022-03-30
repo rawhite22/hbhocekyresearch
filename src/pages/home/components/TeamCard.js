@@ -1,45 +1,40 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { TeamInfo } from '../../../data'
-import { TeamCardContainer, Logo } from '../styles/HomePage.styles'
+import {
+  TeamCardContainer,
+  Logo,
+  RecordContainer,
+} from '../styles/HomePage.styles'
 
 const TeamCard = ({ team }) => {
   return (
     <TeamCardContainer>
       <Logo>
+        {team.lten.wins >= 7 ? (
+          <i className='fa-solid fa-fire fa-2x hot'></i>
+        ) : team.lten.losses > 5 ? (
+          <i className='fa-solid fa-cloud-snow fa-2x cold'></i>
+        ) : null}
+
         {TeamInfo.map((val) => {
           if (val.id == team.id) {
-            return <img src={val.logo}></img>
+            return <img key={val.id} src={val.logo}></img>
           } else return null
         })}
         <h3>{team.name}</h3>
-        <Link to={`/${team.id}`}>Team Page</Link>
+        <Link to={`/${team.id}`}>Go To Team</Link>
       </Logo>
-      <div>
-        <div>
-          <p>W</p>
-          <p>L</p>
-          <p>0</p>
-        </div>
-        <div>
-          <p>Home</p>
-          <p>{team.home.wins}</p>
-          <p>{team.home.losses}</p>
-          <p>{team.home.ot}</p>
-        </div>
-        <div>
-          <p>Road</p>
-          <p>{team.away.wins}</p>
-          <p>{team.away.losses}</p>
-          <p>{team.away.ot}</p>
-        </div>
-        <div>
-          <p>Last Ten</p>
+      <RecordContainer>
+        <p>Last Ten</p>
+        <div className='records'>
           <p> {team.lten.wins}</p>
+          <p>-</p>
           <p> {team.lten.losses}</p>
+          <p>-</p>
           <p> {team.lten.ot}</p>
         </div>
-      </div>
+      </RecordContainer>
     </TeamCardContainer>
   )
 }

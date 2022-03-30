@@ -23,6 +23,7 @@ export const TeamCardContainer = styled.div`
   background: white;
 `
 export const Logo = styled.div`
+  position: relative;
   img {
     width: 75%;
   }
@@ -34,9 +35,57 @@ export const Logo = styled.div`
   h3 {
     font-size: 1.5rem;
   }
+  i {
+    position: absolute;
+    top: -2rem;
+    left: -2rem;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.07);
+    border-radius: 50%;
+    padding: 1rem;
+  }
+  .hot {
+    color: white;
+    background: #ff3d3d;
+  }
+  .cold {
+    color: white;
+    background: rgb(5, 197, 255);
+  }
   @media (max-width: 768px) {
     h3 {
       font-size: 1rem;
+    }
+  }
+  a {
+    background: #0084ffd5;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    color: white;
+    margin: 1rem 0 1rem 0;
+  }
+`
+export const RecordContainer = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  & > p {
+    font-size: 1.4rem;
+    font-weight: bolder;
+  }
+  .records {
+    display: flex;
+    justify-content: space-between;
+    width: 70px;
+    p {
+      font-size: 1.2rem;
+      font-weight: bolder;
     }
   }
 `
