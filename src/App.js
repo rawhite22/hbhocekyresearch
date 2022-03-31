@@ -10,18 +10,22 @@ import GlobalStyles from './styles/GlobalStyles'
 function App() {
   const [navIsOpen, setNavIsOpen] = useState(false)
   return (
-    <div className='App'>
+    <div>
       <GlobalStyles />
       <BrowserRouter>
-        <Navbar toggle={setNavIsOpen} />
-        {navIsOpen ? (
-          <TeamSelectQuick isOpen={navIsOpen} toggle={setNavIsOpen} />
-        ) : null}
-        <Routes>
-          <Route path='/' element={<TeamSelect />} />
-          <Route path='/:teamID' element={<TeamPage />} />
-          <Route path='/:teamID/:playerID' element={<PlayerPage />} />
-        </Routes>
+        <i
+          className='fa-solid fa-arrow-right-from-line fa-2x'
+          onClick={() => setNavIsOpen(!navIsOpen)}
+          style={{ paddingLeft: '2rem', paddingTop: '1rem' }}></i>
+
+        <div className='App'>
+          <Navbar isOpen={navIsOpen} toggle={setNavIsOpen} />
+          <Routes>
+            <Route path='/' element={<TeamSelect isOpen={navIsOpen} />} />
+            <Route path='/:teamID' element={<TeamPage />} />
+            <Route path='/:teamID/:playerID' element={<PlayerPage />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   )

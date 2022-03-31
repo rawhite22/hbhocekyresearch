@@ -1,23 +1,29 @@
+import { AnimatePresence } from 'framer-motion'
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { TeamInfo } from '../data'
 
 import { Nav } from './styles/Navbar.styles'
 
-const Navbar = ({ toggle }) => {
+const Variants = {
+  show: { translateX: '0px' },
+  hide: { translateX: '-200px' },
+}
+
+const Navbar = ({ toggle, isOpen }) => {
   const handleToggle = () => {
-    toggle(true)
+    toggle(!isOpen)
   }
   const location = useLocation()
 
   return (
-    <Nav>
-      {location.pathname === '/' ? null : (
-        <Link to='/'>
-          <i className='fa-solid fa-house'></i>
-        </Link>
-      )}
-
-      <i onClick={handleToggle} className='fa-solid fa-bars'></i>
+    <Nav variants={Variants} animate={isOpen ? 'show' : 'hide'}>
+      <i
+        onClick={handleToggle}
+        className='fa-solid fa-arrow-left-from-line fa-2x'></i>
+      {TeamInfo.map((team) => (
+        <img src={team.logo} />
+      ))}
     </Nav>
   )
 }

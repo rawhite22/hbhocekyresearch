@@ -26,5 +26,8 @@ const GlobalStyles = createGlobalStyle`
               max-width: 100%;
               display: block;
     }
+    .App {
+        display:flex;
+    }
 `
 export default GlobalStyles

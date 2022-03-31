@@ -5,11 +5,11 @@ export const TeamSelectContainer = styled.main`
   padding: 2rem;
   gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-
-    flex-direction: column;
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+  @media (max-width: 468px) {
+    grid-template-columns: minmax(150px, 1fr);
   }
 `
 export const DivisionContainer = styled.section``
