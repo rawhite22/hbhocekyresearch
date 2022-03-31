@@ -2,13 +2,14 @@ import styled from 'styled-components'
 
 export const Nav = styled.nav`
   padding: 2rem;
+
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: center;
-
+  justify-content: space-between;
   flex: wrap;
-  @media (max-width: 768px) {
-    display: none;
+  i {
+    font-size: 2rem;
   }
+  position: relative;
 `
