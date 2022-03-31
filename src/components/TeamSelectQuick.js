@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { TeamInfo } from '../data'
 import { Link } from 'react-router-dom'
@@ -46,7 +46,7 @@ const TeamSelectQuick = ({ toggle, isOpen }) => {
         {TeamInfo.map((team) => (
           <Link to={`/${team.id}`} onClick={() => toggle(false)}>
             {' '}
-            <img src={team.logo} />
+            <img alt='logo' src={team.logo} />
           </Link>
         ))}
         <div className='close-btn' onClick={() => toggle(false)}>
