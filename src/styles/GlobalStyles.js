@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`
         text-rendering: optimizeSpeed;
         line-height: 1.5;
         font-family: 'Montserrat', sans-serif;
+        overflow-X:hidden;
     } 
     img,
     picture {
