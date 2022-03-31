@@ -8,7 +8,6 @@ const Navbar = ({ toggle }) => {
     toggle(true)
   }
   const location = useLocation()
-  console.log(location)
 
   return (
     <Nav>

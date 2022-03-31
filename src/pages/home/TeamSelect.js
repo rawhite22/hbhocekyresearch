@@ -15,8 +15,6 @@ const TeamSelect = () => {
     return <p>loading</p>
   }
 
-  console.log(data)
-
   return (
     <TeamSelectContainer>
       <DivisionContainer>

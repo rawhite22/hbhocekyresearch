@@ -4,7 +4,7 @@ import { TeamInfo } from '../data'
 import { Link } from 'react-router-dom'
 
 const QuickContainer = styled.div`
-  over-flow: hidden;
+  overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -12,17 +12,31 @@ const QuickContainer = styled.div`
   width: 100vw;
   z-index: ${(props) => (props.isOpen ? '100' : '-1')};
   opacity: ${(props) => (props.isOpen ? 1 : 0)};
-  transition: all 0.5s ease;
+  .close-btn {
+    align-self: center;
+    justify-self: center;
+  }
   .container {
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+      gap: 0.2rem;
+      img {
+        height: 50px;
+      }
+    }
+    position: relative;
+    top: -300px;
+    transform: ${(props) => (props.isOpen ? 'translateY(300px)' : null)};
+    left: 0;
     padding: 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-    height: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    justify-content: center;
     background-color: #edf2f7;
     z-index: 100;
-    img {
-      height: 50px;
-    }
+    -webkit-box-shadow: 0px 7px 4px -1px rgba(0, 0, 0, 0.21);
+    box-shadow: 0px 7px 4px -1px rgba(0, 0, 0, 0.21);
   }
 `
 const TeamSelectQuick = ({ toggle, isOpen }) => {
@@ -35,6 +49,9 @@ const TeamSelectQuick = ({ toggle, isOpen }) => {
             <img src={team.logo} />
           </Link>
         ))}
+        <div className='close-btn' onClick={() => toggle(false)}>
+          <i className='fa-solid fa-rectangle-xmark fa-2x'></i>
+        </div>
       </div>
     </QuickContainer>
   )
