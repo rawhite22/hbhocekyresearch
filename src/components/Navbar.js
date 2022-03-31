@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { TeamInfo } from '../data'
 
 import { Nav } from './styles/Navbar.styles'
@@ -24,11 +24,23 @@ const Navbar = ({ toggle, isOpen }) => {
       <Link to='/' onClick={handleToggle}>
         <i className='fa-solid fa-house fa-2x'></i>
       </Link>
-      {TeamInfo.map((team) => (
-        <Link onClick={handleToggle} to={`/${team.id}`}>
-          <img src={team.logo} />
-        </Link>
-      ))}
+      {TeamInfo.map((team) => {
+        if (location.pathname.split('/')[1] === team.id.toString()) {
+          return (
+            <Link
+              style={{ backgroundColor: '#6BCB77', borderRadius: '5px' }}
+              onClick={handleToggle}
+              to={`/${team.id}`}>
+              <img src={team.logo} />
+            </Link>
+          )
+        }
+        return (
+          <Link onClick={handleToggle} to={`/${team.id}`}>
+            <img src={team.logo} />
+          </Link>
+        )
+      })}
     </Nav>
   )
 }
