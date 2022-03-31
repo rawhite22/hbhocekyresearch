@@ -11,6 +11,9 @@ export const TeamSelectContainer = styled.main`
   @media (max-width: 468px) {
     grid-template-columns: minmax(150px, 1fr);
   }
+  h2 {
+    margin-bottom: 1rem;
+  }
 `
 export const DivisionContainer = styled.section``
 export const TeamCardContainer = styled.div`

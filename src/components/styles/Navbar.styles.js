@@ -9,11 +9,15 @@ export const Nav = styled(motion.nav)`
   position: absolute;
   top: 0;
   left: 0;
-  -webkit-box-shadow: 9px -1px 7px -6px #000000;
-  box-shadow: 9px -1px 7px -6px #000000;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(107, 107, 107, 0.54);
+  -moz-box-shadow: 3px 3px 5px 0px rgba(107, 107, 107, 0.54);
+  box-shadow: 3px 3px 5px 0px rgba(107, 107, 107, 0.54);
   padding: 1rem;
   img {
     height: 50px;
+    padding: 0.2rem;
+  }
+  i {
     padding: 0.2rem;
   }
   z-index: 10;

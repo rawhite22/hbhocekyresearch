@@ -21,8 +21,13 @@ const Navbar = ({ toggle, isOpen }) => {
       <i
         onClick={handleToggle}
         className='fa-solid fa-arrow-left-from-line fa-2x'></i>
+      <Link to='/' onClick={handleToggle}>
+        <i className='fa-solid fa-house fa-2x'></i>
+      </Link>
       {TeamInfo.map((team) => (
-        <img src={team.logo} />
+        <Link onClick={handleToggle} to={`/${team.id}`}>
+          <img src={team.logo} />
+        </Link>
       ))}
     </Nav>
   )
