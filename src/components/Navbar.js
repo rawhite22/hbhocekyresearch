@@ -37,13 +37,13 @@ const Navbar = ({ toggle, isOpen }) => {
           if (location.pathname.split('/')[1] === team.id.toString()) {
             return (
               <Link key={team.id} onClick={handleToggle} to={`/${team.id}`}>
-                <img src={team.logo} />
+                <img src={team.logo} alt='logo' />
               </Link>
             )
           }
           return (
             <Link key={team.id} onClick={handleToggle} to={`/${team.id}`}>
-              <img src={team.logo} />
+              <img src={team.logo} alt='logo' />
             </Link>
           )
         })}

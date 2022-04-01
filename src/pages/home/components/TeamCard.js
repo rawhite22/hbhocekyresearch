@@ -22,8 +22,8 @@ const TeamCard = ({ team }) => {
         ) : null}
 
         {TeamInfo.map((val) => {
-          if (val.id == team.id) {
-            return <img key={val.id} src={val.logo}></img>
+          if (Number(val.id) === team.id) {
+            return <img key={val.id} src={val.logo} alt='logo'></img>
           } else return null
         })}
         <h3>{team.name}</h3>
