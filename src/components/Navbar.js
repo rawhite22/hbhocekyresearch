@@ -13,41 +13,39 @@ const Variants = {
 const Navbar = ({ toggle, isOpen }) => {
   const handleToggle = () => {
     toggle(!isOpen)
+    window.scroll({ top: 0, behavior: 'smooth' })
   }
   const location = useLocation()
 
   return (
-    <Nav variants={Variants} animate={isOpen ? 'show' : 'hide'}>
-      <i
-        onClick={handleToggle}
-        className='fa-solid fa-arrow-left-from-line fa-2x'></i>
-      <div className='seperator'></div>
-      <Link to='/' onClick={handleToggle}>
-        <i className='fa-solid fa-house fa-2x'></i>
-      </Link>
-      <div className='seperator'></div>
-      {TeamInfo.map((team) => {
-        if (location.pathname.split('/')[1] === team.id.toString()) {
-          return (
-            <Link
-              style={{
-                backgroundColor: '#2a98ff',
-                borderRadius: '5px',
-                padding: '5px',
-              }}
-              onClick={handleToggle}
-              to={`/${team.id}`}>
-              <img src={team.logo} />
-            </Link>
-          )
-        }
-        return (
-          <Link onClick={handleToggle} to={`/${team.id}`}>
-            <img src={team.logo} />
-          </Link>
-        )
-      })}
-    </Nav>
+    <AnimatePresence>
+      <Nav variants={Variants} animate={isOpen ? 'show' : 'hide'}>
+        <i
+          onClick={handleToggle}
+          className='fa-solid fa-arrow-left-from-line fa-2x'></i>
+        <div className='seperator'></div>
+        <Link to='/' onClick={handleToggle}>
+          <i className='fa-solid fa-house fa-2x'></i>
+        </Link>
+        <div className='seperator'></div>
+        <div className='team-container'>
+          {TeamInfo.map((team) => {
+            if (location.pathname.split('/')[1] === team.id.toString()) {
+              return (
+                <Link onClick={handleToggle} to={`/${team.id}`}>
+                  <img src={team.logo} />
+                </Link>
+              )
+            }
+            return (
+              <Link onClick={handleToggle} to={`/${team.id}`}>
+                <img src={team.logo} />
+              </Link>
+            )
+          })}
+        </div>
+      </Nav>
+    </AnimatePresence>
   )
 }
 

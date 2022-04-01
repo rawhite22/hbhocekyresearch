@@ -8,6 +8,10 @@ import {
 } from '../styles/HomePage.styles'
 
 const TeamCard = ({ team }) => {
+  const handleCLick = () => {
+    window.scrollTo(0, 0)
+  }
+
   return (
     <TeamCardContainer>
       <Logo>
@@ -23,7 +27,9 @@ const TeamCard = ({ team }) => {
           } else return null
         })}
         <h3>{team.name}</h3>
-        <Link to={`/${team.id}`}>Go To Team</Link>
+        <Link onClick={handleCLick} to={`/${team.id}`}>
+          Go To Team
+        </Link>
       </Logo>
       <RecordContainer>
         <p>Last Ten</p>

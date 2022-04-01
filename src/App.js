@@ -18,7 +18,10 @@ function App() {
           style={{ paddingLeft: '2rem', paddingTop: '1rem' }}></i>
 
         <div className='App'>
-          <Navbar isOpen={navIsOpen} toggle={setNavIsOpen} />
+          {navIsOpen ? (
+            <Navbar isOpen={navIsOpen} toggle={setNavIsOpen} />
+          ) : null}
+
           <Routes>
             <Route path='/' element={<TeamSelect isOpen={navIsOpen} />} />
             <Route path='/:teamID' element={<TeamPage />} />
