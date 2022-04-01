@@ -34,7 +34,7 @@ export const Nav = styled(motion.nav)`
     display: grid;
     grid-template-columns: repeat(2, minmax(100px, 1fr));
     width: 100%;
-    height: 80%;
+    height: 90%;
   }
   @media (max-width: 468px) {
     width: 100%;

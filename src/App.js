@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
@@ -18,10 +19,11 @@ function App() {
           style={{ paddingLeft: '2rem', paddingTop: '1rem' }}></i>
 
         <div className='App'>
-          {navIsOpen ? (
-            <Navbar isOpen={navIsOpen} toggle={setNavIsOpen} />
-          ) : null}
-
+          <AnimatePresence>
+            {navIsOpen ? (
+              <Navbar isOpen={navIsOpen} toggle={setNavIsOpen} />
+            ) : null}
+          </AnimatePresence>
           <Routes>
             <Route path='/' element={<TeamSelect isOpen={navIsOpen} />} />
             <Route path='/:teamID' element={<TeamPage />} />
