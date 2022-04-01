@@ -21,14 +21,20 @@ const Navbar = ({ toggle, isOpen }) => {
       <i
         onClick={handleToggle}
         className='fa-solid fa-arrow-left-from-line fa-2x'></i>
+      <div className='seperator'></div>
       <Link to='/' onClick={handleToggle}>
         <i className='fa-solid fa-house fa-2x'></i>
       </Link>
+      <div className='seperator'></div>
       {TeamInfo.map((team) => {
         if (location.pathname.split('/')[1] === team.id.toString()) {
           return (
             <Link
-              style={{ backgroundColor: '#6BCB77', borderRadius: '5px' }}
+              style={{
+                backgroundColor: '#2a98ff',
+                borderRadius: '5px',
+                padding: '5px',
+              }}
               onClick={handleToggle}
               to={`/${team.id}`}>
               <img src={team.logo} />

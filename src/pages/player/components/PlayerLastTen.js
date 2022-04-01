@@ -8,15 +8,9 @@ const Section = styled.section`
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 0.5rem;
 `
-const Article = styled(motion.article)`
-  background: #272727;
-  border-radius: 5px;
-  padding: 0.5rem;
-`
+
 const Card = styled(motion.div)`
-  background: #272727;
   border-radius: 5px;
-  padding: 0.5rem;
 `
 
 const PlayerLastTen = ({ lastTen, position }) => {
@@ -25,7 +19,7 @@ const PlayerLastTen = ({ lastTen, position }) => {
       <Section>
         {lastTen.map((gameInfo) => (
           <Card key={gameInfo.date}>
-            <motion.h3>Date:{gameInfo.date}</motion.h3>(
+            <motion.h3>Date:{gameInfo.date}</motion.h3>
             <motion.div>
               <p>Win:{gameInfo.isWin ? 1 : 0}</p>
               <p>Loss:{gameInfo.isWin ? 0 : 1}</p>
@@ -34,7 +28,6 @@ const PlayerLastTen = ({ lastTen, position }) => {
               <p>Goals Against:{gameInfo.stat.goalsAgainst}</p>
               <p>Save %:{gameInfo.stat.savePercentage}</p>
             </motion.div>
-            )
           </Card>
         ))}
       </Section>

@@ -28,7 +28,7 @@ const PlayerRankings = ({ rankings, position }) => {
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
       }}>
-      <h3>Rankings</h3>
+      <h3>League Rankings</h3>
       <p>goals: {rankings.rankGoals}</p>
       <p>Assists: {rankings.rankAssists}</p>
       <p>BlockedShots: {rankings.rankBlockedShots}</p>

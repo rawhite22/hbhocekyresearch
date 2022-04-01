@@ -57,27 +57,27 @@ export const draftKingsCompiler = (arr) => {
   const shotTotal = shotsArr.reduce((a, b) => a + b, 0)
   const blockTotal = blocksArr.reduce((a, b) => a + b, 0)
   const shpTotal = shpArr.reduce((a, b) => a + b, 0)
-  const b = (blockTotal * 1.3) / 10
+  const b = (blockTotal * 1.3) / 1.3
   // obj
   const dkTotals = {
-    g: (goalTotal * 8.5) / 10,
-    a: (assistTotal * 5) / 10,
-    sht: (shotTotal * 1.5) / 10,
-    shtb: (shtBonus.length * 3) / 10,
+    g: (goalTotal * 8.5) / 8.5,
+    a: (assistTotal * 5) / 5,
+    sht: (shotTotal * 1.5) / 1.5,
+    shtb: (shtBonus.length * 3) / 3,
     blk: Number(b.toFixed(1)),
-    blkb: (blkBonus.length * 3) / 10,
-    pointB: (points.length * 3) / 10,
-    shp: (shpTotal * 2) / 10,
+    blkb: (blkBonus.length * 3) / 3,
+    pointB: (points.length * 3) / 3,
+    shp: (shpTotal * 2) / 2,
   }
   const dkTotalsArr = [
-    dkTotals.a,
-    dkTotals.blk,
-    dkTotals.blkb,
-    dkTotals.g,
-    dkTotals.pointB,
-    dkTotals.shp,
-    dkTotals.sht,
-    dkTotals.shtb,
+    (dkTotals.a * 5) / 5,
+    (b * 1.3) / 5,
+    (dkTotals.blkb * 3) / 5,
+    (dkTotals.g * 8.5) / 5,
+    (dkTotals.pointB * 3) / 5,
+    (dkTotals.shp * 2) / 5,
+    (dkTotals.sht * 1.5) / 5,
+    (dkTotals.shtb * 3) / 5,
   ]
 
   const tga = dkTotalsArr.reduce((a, b) => {
@@ -113,24 +113,24 @@ export const dkGoalieCompiler = (arr) => {
   goalsAgainst.forEach((game) => {
     gaArr.push(game.stat.goalsAgainst)
   })
-  const gaTotal = (gaArr.reduce((a, b) => a + b, 0) / 10) * -3.5
+  const gaTotal = gaArr.reduce((a, b) => a + b, 0)
 
   // totals
   const dkTotals = {
-    w: (wins.length * 6) / 10,
-    sv: ((svTotal * 0.7) / 10) * 0.7,
-    ga: Number(gaTotal.toFixed(1)),
-    sho: (10 - goalsAgainst.length) / 10,
-    otl: (otl.length * 2) / 10,
-    svb: (svBonus.length * 3) / 10,
+    w: wins.length,
+    sv: svTotal,
+    ga: gaTotal,
+    sho: 5 - goalsAgainst.length,
+    otl: otl.length,
+    svb: svBonus.length,
   }
   const dkTotalsArr = [
-    dkTotals.w,
-    dkTotals.sv,
-    dkTotals.ga,
-    dkTotals.sho,
-    dkTotals.otl,
-    dkTotals.svb,
+    (dkTotals.w * 6) / 5,
+    (dkTotals.sv * 0.7) / 5,
+    (dkTotals.ga * -3.5) / 5,
+    (dkTotals.sho * 4) / 5,
+    (dkTotals.otl * 2) / 5,
+    (dkTotals.svb * 3) / 5,
   ]
   const tga = dkTotalsArr.reduce((a, b) => a + b, 0)
   const tenGameAvg = Number(tga.toFixed(2))

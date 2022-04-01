@@ -22,4 +22,11 @@ export const Nav = styled(motion.nav)`
   }
   z-index: 10;
   background-color: #edf2f7;
+  .seperator {
+    height: 4px;
+    width: 75%;
+    background: black;
+    border-radius: 5px;
+    margin: 15px 0;
+  }
 `

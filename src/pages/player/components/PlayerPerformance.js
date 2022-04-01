@@ -8,10 +8,7 @@ import {
 // styles
 import styled from 'styled-components'
 
-const Span = styled.span`
-  color: ${(props) =>
-    props.score > 15 ? 'green' : props.score < 7 ? 'red' : '#c8d7e6'};
-`
+const Span = styled.span``
 
 const PlayerPerformance = ({ lastTen, position }) => {
   if (position !== 'G') {
@@ -22,17 +19,22 @@ const PlayerPerformance = ({ lastTen, position }) => {
       <section>
         <h3>Performance</h3>
         <div className='draftKings'>
-          <h4>Draft Kings</h4>
-          <p>goals: {dkTotals.g}</p>
-          <p>assists: {dkTotals.a}</p>
-          <p>shots: {dkTotals.sht}</p>
-          <p>shot bonus: {dkTotals.shtb}</p>
-          <p>blocks: {dkTotals.blk}</p>
-          <p>block bonus: {dkTotals.blkb}</p>
-          <p>3 point bonus: {dkTotals.pointB}</p>
-          <p>shp: {dkTotals.shp}</p>
+          <p>{dkTotals.g} goals in last five games.</p>
+          <p>{dkTotals.a} assists in last five games.</p>
+          <p>{dkTotals.sht} shots in last five games. </p>
           <p>
-            Scoring average from last ten games:{' '}
+            reached the shot bonus {dkTotals.shtb} time(s) in the last five
+            games.
+          </p>
+          <p>{dkTotals.blk} blocks in the last five games. </p>
+          <p>
+            reached the block bonus {dkTotals.blkb} time(s) in the last five
+            games.
+          </p>
+          <p>reached three point bonus {dkTotals.pointB} time(s)</p>
+          <p>{dkTotals.shp} shorthanded points in the last five games. </p>
+          <p>
+            Draftkings scoring average from last five games:{' '}
             <Span score={tenGameAvg}>{tenGameAvg}</Span> points per game.
           </p>
         </div>
@@ -45,14 +47,14 @@ const PlayerPerformance = ({ lastTen, position }) => {
       <section>
         <h3>Performance</h3>
         <div className='draftKings'>
-          <p>Wins: {dkTotals.w}</p>
-          <p>Saves: {dkTotals.sv}</p>
-          <p>GoalsAgainst: {dkTotals.ga}</p>
-          <p>Shutout: {dkTotals.sho}</p>
-          <p>Overtime Loss: {dkTotals.otl}</p>
-          <p>35+ Save Bonus: {dkTotals.svb}</p>
+          <p>{dkTotals.w} wins over the last five starts.</p>
+          <p>{dkTotals.sv} total saves over the last five starts.</p>
+          <p>{dkTotals.ga} goals given up oveer the last five starts.</p>
+          <p>{dkTotals.sho} shutous</p>
+          <p>{dkTotals.otl} overtime losses </p>
+          <p>35+ save bonus reached {dkTotals.svb} time(s)</p>
           <p>
-            Scoring average from last ten games:{' '}
+            Draftkings scoring average from last five games:{' '}
             <Span score={tenGameAvg}>{tenGameAvg}</Span> points per game.
           </p>
         </div>

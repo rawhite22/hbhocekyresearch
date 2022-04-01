@@ -54,7 +54,7 @@ const usePlayerFetch = (params) => {
       .then((values) => {
         dispatch(getPlayerInfo(values[0].people[0]))
         dispatch(getPlayerRanks(values[1].stats[0].splits[0].stat))
-        dispatch(getPlayerLastTen(values[2].stats[0].splits.slice(0, 10)))
+        dispatch(getPlayerLastTen(values[2].stats[0].splits.slice(0, 5)))
       })
       .then(() => dispatch({ type: 'SET_LOADING_FALSE_PI' }))
       .catch((err) => {

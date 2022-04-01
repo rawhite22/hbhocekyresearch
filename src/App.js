@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import TeamSelectQuick from './components/TeamSelectQuick'
 
 import TeamSelect from './pages/home/TeamSelect'
 import PlayerPage from './pages/player/PlayerPage'
