@@ -5,6 +5,9 @@ export const TeamSelectContainer = styled.main`
   padding: 2rem;
   gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  overflow: ${(props) => (props.isOpen ? 'hidden' : 'auto')};
+  height: ${(props) => (props.isOpen ? '100vh' : 'auto')};
+
   @media (max-width: 800px) {
     grid-template-columns: repeat(2, minmax(200px, 1fr));
   }

@@ -9,20 +9,18 @@ import PlayerPerformance from './components/PlayerPerformance'
 import PlayerRankings from './components/PlayerRankings'
 const PlayerPage = () => {
   const params = useParams()
+  console.log(params)
   const { playerInfo } = useSelector((state) => state)
-
   const { error } = usePlayerFetch(params)
-
   if (playerInfo.loading) {
     return <div>loading...</div>
   }
   if (error) {
     return <p>{error}</p>
   }
-
   return (
     <div className='playerpage_container' style={{ padding: '1rem' }}>
-      <PlayerInfo info={playerInfo.playerInfo.info} />
+      <PlayerInfo info={playerInfo.playerInfo.info} teamID={params.teamID} />
       <PlayerRankings
         position={playerInfo.playerInfo.info.primaryPosition.code}
         rankings={playerInfo.playerInfo.rankings}
