@@ -9,7 +9,7 @@ import PlayerPerformance from './components/PlayerPerformance'
 import PlayerRankings from './components/PlayerRankings'
 const PlayerPage = () => {
   const params = useParams()
-  console.log(params)
+
   const { playerInfo } = useSelector((state) => state)
   const { error } = usePlayerFetch(params)
   if (playerInfo.loading) {

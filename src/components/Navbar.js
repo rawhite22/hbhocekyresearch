@@ -36,13 +36,13 @@ const Navbar = ({ toggle, isOpen }) => {
         {TeamInfo.map((team) => {
           if (location.pathname.split('/')[1] === team.id.toString()) {
             return (
-              <Link onClick={handleToggle} to={`/${team.id}`}>
+              <Link key={team.id} onClick={handleToggle} to={`/${team.id}`}>
                 <img src={team.logo} />
               </Link>
             )
           }
           return (
-            <Link onClick={handleToggle} to={`/${team.id}`}>
+            <Link key={team.id} onClick={handleToggle} to={`/${team.id}`}>
               <img src={team.logo} />
             </Link>
           )
@@ -53,9 +53,3 @@ const Navbar = ({ toggle, isOpen }) => {
 }
 
 export default Navbar
-
-// <TeamSelect>
-//       {TeamInfo.map((team) => {
-//         return <img src={team.logo} />
-//       })}
-//     </TeamSelect>
