@@ -23,7 +23,12 @@ const TeamCard = ({ team }) => {
 
         {TeamInfo.map((val) => {
           if (Number(val.id) === team.id) {
-            return <img key={val.id} src={val.logo} alt='logo'></img>
+            return (
+              <img
+                key={val.id}
+                src={`https://hudsonboys-resources.s3.amazonaws.com/${team.id}.png`}
+                alt='logo'></img>
+            )
           } else return null
         })}
         <h3>{team.name}</h3>

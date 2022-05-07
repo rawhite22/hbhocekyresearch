@@ -37,7 +37,10 @@ const Navbar = ({ toggle, isOpen }) => {
           if (location.pathname.split('/')[1] === team.id.toString()) {
             return (
               <Link key={team.id} onClick={handleToggle} to={`/${team.id}`}>
-                <img src={team.logo} alt='logo' />
+                <img
+                  src={`https://hudsonboys-resources.s3.amazonaws.com/${team.id}.png`}
+                  alt='logo'
+                />
               </Link>
             )
           }
